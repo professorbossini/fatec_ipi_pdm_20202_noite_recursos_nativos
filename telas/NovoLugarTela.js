@@ -9,19 +9,32 @@ import {
   ScrollView
 }
   from 'react-native';
+import { useDispatch } from 'react-redux';
+import TiraFoto from '../componentes/TiraFoto';
 
 import Cores from '../constantes/Cores';
+import * as lugaresActions from '../store/lugares-actions';
 
 const NovoLugarTela = (props) => {
 
+  const dispatch = useDispatch();
+
   const[novoLugar, setNovoLugar] = useState('');
+  const [imagemURI, setImagemURI] = useState();
+
+  const fotoTirada = imagemURI => {
+    setImagemURI(imagemURI);
+  }
+
+
   const novoLugarAlterado = (texto) => {
     setNovoLugar (texto);
   }
 
   const adicionarLugar = () => {
-    console.log (`Adicionando lugar: ${novoLugar}`);
+    dispatch (lugaresActions.addLugar(novoLugar, imagemURI));
     setNovoLugar('');
+    props.navigation.goBack();
   }
 
   return (
@@ -33,6 +46,7 @@ const NovoLugarTela = (props) => {
           onChangeText={novoLugarAlterado}
           value={novoLugar}
         />
+        <TiraFoto onFotoTirada={fotoTirada}/>
         <Button 
           title="Salvar Lugar"
           color={Cores.primary}
