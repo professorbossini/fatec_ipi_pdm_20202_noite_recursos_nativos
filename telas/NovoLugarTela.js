@@ -10,6 +10,7 @@ import {
 }
   from 'react-native';
 import { useDispatch } from 'react-redux';
+import CapturaLocalizacao from '../componentes/CapturaLocalizacao';
 import TiraFoto from '../componentes/TiraFoto';
 
 import Cores from '../constantes/Cores';
@@ -47,6 +48,7 @@ const NovoLugarTela = (props) => {
           value={novoLugar}
         />
         <TiraFoto onFotoTirada={fotoTirada}/>
+        <CapturaLocalizacao />
         <Button 
           title="Salvar Lugar"
           color={Cores.primary}
